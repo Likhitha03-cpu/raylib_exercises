@@ -1,21 +1,31 @@
 const r = require("raylib");
 
 // Window Dimensions
-const WIDTH = 700;
-const HEIGHT = 500;
+const WIDTH = 900;
+const HEIGHT = 700;
 const TITLE = "Particle-detector";
 
-// Scanner Dimensions
-let horizontal_direction = 1;
-let scanner_x = 0;
-let scanner_y = 0;
+// First Scanner Dimensions
 
-const scannerWidth = 40;
-const scannerHeight = HEIGHT;
-let scannerColour = r.WHITE;
+let firstScanner_x = 0;
+let firstScanner_y = 0;
+let firstScanner_direction = 1;
+
+const firstScannerWidth = 40;
+const firstScannerHeight = HEIGHT;
+let firstScannerColour = r.WHITE;
+
+
+let secondScanner_x = WIDTH / 2;
+let secondScanner_y = 0;
+let secondScanner_direction = 1;
+
+const secondScannerWidth = 40;
+const secondScannerHeight = HEIGHT;
+let secondScannerColour = r.WHITE;
 
 // First Particle field Dimensions
-const firstParticleField_x = 200;
+const firstParticleField_x = 300;
 const firstParticleField_y = 0;
 const firstParticleWidth = 100;
 const firstParticleHeight = HEIGHT;
@@ -39,42 +49,64 @@ function setup() {
     r.SetTargetFPS(60);
 }
 
-
-// Detect particle field for both Particle fields
-function detectParticle() {
+function detectFirstParticle() {
     const touchesFirst =
-        scanner_x + scannerWidth >= firstParticleField_x &&
-        scanner_x <= firstParticleField_x + firstParticleWidth;
+        firstScanner_x + firstScannerWidth >= firstParticleField_x &&
+        firstScanner_x <= firstParticleField_x + firstParticleWidth;
 
-    const touchesSecond =
-        scanner_x + scannerWidth >= secondParticleField_x &&
-        scanner_x <= secondParticleField_x + secondParticleWidth;
-
-    if (touchesFirst || touchesSecond) {
-        scannerColour = r.RED;
+    if (touchesFirst) {
+        firstScannerColour = r.RED;
     } else {
-        scannerColour = r.WHITE;
+        firstScannerColour = r.WHITE;
     }
 }
 
+function detectSecondParticle() {
+    const touchesSecond =
+        secondScanner_x + secondScannerWidth >= secondParticleField_x &&
+        secondScanner_x <= secondParticleField_x + secondParticleWidth;
 
+    if (touchesSecond) {
+        secondScannerColour = r.RED;
+    } else {
+        secondScannerColour = r.WHITE;
+    }
+}
 
-// Update scanner position
-function update() {
-    scanner_x = scanner_x + horizontal_direction;
+function updateFirstScanner() {
+    firstScanner_x += firstScanner_direction;
 
     if (
-        scanner_x + scannerWidth >= WIDTH ||
-        scanner_x <= 0
+        firstScanner_x + firstScannerWidth >= WIDTH / 2 ||
+        firstScanner_x <= 0
     ) {
-        horizontal_direction = -horizontal_direction;
+        firstScanner_direction = -firstScanner_direction;
     }
 
-    detectParticle();
+    detectFirstParticle();
 }
 
 
-// Draw everything
+function updateSecondScanner() {
+    secondScanner_x += secondScanner_direction;
+    if (
+        secondScanner_x + secondScannerWidth >= WIDTH ||
+        secondScanner_x <= WIDTH / 2
+    ) {
+        secondScanner_direction = -secondScanner_direction;
+    }
+
+    detectSecondParticle();
+}
+
+
+function update() {
+    updateFirstScanner();
+    updateSecondScanner();
+}
+
+
+
 function draw() {
     r.BeginDrawing();
 
@@ -96,14 +128,22 @@ function draw() {
         secondParticleColour
     );
 
-    // Draw scanner
     r.DrawRectangle(
-        scanner_x,
-        scanner_y,
-        scannerWidth,
-        scannerHeight,
-        scannerColour
+        firstScanner_x,
+        firstScanner_y,
+        firstScannerWidth,
+        firstScannerHeight,
+        firstScannerColour
     );
+
+    r.DrawRectangle(
+        secondScanner_x,
+        secondScanner_y,
+        secondScannerWidth,
+        secondScannerHeight,
+        secondScannerColour
+    );
+
 
     update();
 
