@@ -15,10 +15,10 @@ const firstScannerWidth = 40;
 const firstScannerHeight = HEIGHT;
 let firstScannerColour = r.WHITE;
 
-
+// Second Scanner Dimensions
 let secondScanner_x = WIDTH / 2;
 let secondScanner_y = 0;
-let secondScanner_direction = 1;
+let secondScanner_direction = 3;
 
 const secondScannerWidth = 40;
 const secondScannerHeight = HEIGHT;
@@ -49,6 +49,7 @@ function setup() {
     r.SetTargetFPS(60);
 }
 
+// Detecting at First Particle 
 function detectFirstParticle() {
     const touchesFirst =
         firstScanner_x + firstScannerWidth >= firstParticleField_x &&
@@ -60,7 +61,7 @@ function detectFirstParticle() {
         firstScannerColour = r.WHITE;
     }
 }
-
+//Detecting at Second Particle
 function detectSecondParticle() {
     const touchesSecond =
         secondScanner_x + secondScannerWidth >= secondParticleField_x &&
@@ -73,33 +74,31 @@ function detectSecondParticle() {
     }
 }
 
+//Updating first scanner to move from starting to middle of the screen and repeat
 function updateFirstScanner() {
     firstScanner_x += firstScanner_direction;
 
-    if (
-        firstScanner_x + firstScannerWidth >= WIDTH / 2 ||
-        firstScanner_x <= 0
-    ) {
+    if (firstScanner_x + firstScannerWidth >= WIDTH / 2 ||
+        firstScanner_x <= 0) {
         firstScanner_direction = -firstScanner_direction;
     }
 
     detectFirstParticle();
 }
 
-
+//Updating second scanner to move from middle to end of the screen and repeat
 function updateSecondScanner() {
     secondScanner_x += secondScanner_direction;
-    if (
-        secondScanner_x + secondScannerWidth >= WIDTH ||
-        secondScanner_x <= WIDTH / 2
-    ) {
+
+    if (secondScanner_x + secondScannerWidth >= WIDTH ||
+        secondScanner_x <= WIDTH / 2) {
         secondScanner_direction = -secondScanner_direction;
     }
 
     detectSecondParticle();
 }
 
-
+// Calling both Updating Functions
 function update() {
     updateFirstScanner();
     updateSecondScanner();
@@ -112,7 +111,7 @@ function draw() {
 
     r.ClearBackground(r.BLACK);
 
-    // Draw particle field
+    // First particle field
     r.DrawRectangle(
         firstParticleField_x,
         firstParticleField_y,
@@ -120,6 +119,7 @@ function draw() {
         firstParticleHeight,
         firstParticleColour
     );
+    // Second Particle field
     r.DrawRectangle(
         secondParticleField_x,
         secondParticleField_y,
@@ -128,6 +128,7 @@ function draw() {
         secondParticleColour
     );
 
+    // First Scanner 
     r.DrawRectangle(
         firstScanner_x,
         firstScanner_y,
@@ -136,6 +137,7 @@ function draw() {
         firstScannerColour
     );
 
+    // Second Scanner
     r.DrawRectangle(
         secondScanner_x,
         secondScanner_y,
