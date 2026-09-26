@@ -24,12 +24,12 @@ const secondScannerWidth = 40;
 const secondScannerHeight = HEIGHT;
 let secondScannerColour = r.WHITE;
 //third Scanner
-let thirdScanner_x = WIDTH / 2;
+let thirdScanner_x = 0;
 let thirdScanner_y = 0;
-let thirdScanner_direction = 3;
+let thirdScanner_direction = 1;
 
-const thirdScannerWidth = 40;
-const thirdScannerHeight = HEIGHT;
+const thirdScannerWidth = WIDTH;
+const thirdScannerHeight = 40;
 let thirdScannerColour = r.WHITE;
 
 // First Particle field Dimensions
@@ -48,9 +48,9 @@ const secondParticleColour = r.BLUE;
 
 //third Particle Field Dimension
 const thirdParticleField_x = 0;
-const thirdParticleField_y = 500;
-const thirdParticleWidth = 50;
-const thirdParticleHeight = HEIGHT;
+const thirdParticleField_y = 200;
+const thirdParticleWidth = WIDTH;
+const thirdParticleHeight = 50;
 const thirdParticleColour = r.BLUE;
 function running() {
     return !r.WindowShouldClose();
@@ -90,8 +90,8 @@ function detectSecondParticle() {
 
 function detectThirdParticle() {
     const touchesSecond =
-        thirdScanner_x + thirdScannerWidth >= thirdParticleField_x &&
-        thirdScanner_x <= thirdParticleField_x + thirdParticleWidth;
+        thirdScanner_y + thirdScannerHeight >= thirdParticleField_y &&
+        thirdScanner_y <= thirdParticleField_y + thirdParticleHeight;
 
     if (touchesSecond) {
         thirdScannerColour = r.RED;
@@ -127,7 +127,7 @@ function updateSecondScanner() {
 function updateThirdScanner() {
     thirdScanner_y += thirdScanner_direction;
 
-    if (thirdScanner_y + thirdScannerHeight >= WIDTH ||
+    if (thirdScanner_y + thirdScannerHeight >= HEIGHT ||
         thirdScanner_y <= 0) {
         thirdScanner_direction = - thirdScanner_direction;
     }
