@@ -12,22 +12,27 @@ function setup() {
     r.SetTargetFPS(60);
 }
 let horizontal_direction = 1;
-let x_axis = 0;
-let y_axis = 0;
-const rect_Width = 40;
-const rect_Height = HEIGHT;
-const rect_Colour = r.WHITE;
+let scanner_x = 0;
+let scanner_y = 0;
+const scannerWidth = 40;
+const scannerHeight = HEIGHT;
+const scannerColour = r.WHITE;
 
 function update() {
-    x_axis = x_axis + horizontal_direction;
-    if (x_axis + rect_Width >= WIDTH || x_axis <= 0) {
+    scanner_x = scanner_x + horizontal_direction;
+    if (scanner_x + scannerWidth >= WIDTH || scanner_x <= 0) {
         horizontal_direction = - horizontal_direction;
     }
 }
 function draw() {
     r.BeginDrawing();
     r.ClearBackground(r.BLACK);
-    r.DrawRectangle(x_axis, y_axis, rect_Width, rect_Height, rect_Colour);
+    const particleField_x = 200;
+    const particleField_y = 0;
+    const particleWidth = 100;
+    const particleColour = r.BLUE;
+    r.DrawRectangle(particleField_x, particleField_y, particleWidth, scannerHeight, particleColour);
+    r.DrawRectangle(scanner_x, scanner_y, scannerWidth, scannerHeight, scannerColour);
     update();
     r.EndDrawing();
 }
