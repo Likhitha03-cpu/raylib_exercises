@@ -40,7 +40,7 @@ function setup() {
 }
 
 
-// Detect particle field
+// Detect particle field for both Particle fields
 function detectParticle() {
     const touchesFirst =
         scanner_x + scannerWidth >= firstParticleField_x &&
