@@ -14,13 +14,19 @@ const scannerWidth = 40;
 const scannerHeight = HEIGHT;
 let scannerColour = r.WHITE;
 
-// Particle field Dimensions
-const particleField_x = 200;
-const particleField_y = 0;
-const particleWidth = 100;
-const particleHeight = HEIGHT;
-const particleColour = r.BLUE;
+// First Particle field Dimensions
+const firstParticleField_x = 200;
+const firstParticleField_y = 0;
+const firstParticleWidth = 100;
+const firstParticleHeight = HEIGHT;
+const firstParticleColour = r.BLUE;
 
+// Second Particle field Dimensions
+const secondParticleField_x = 500;
+const secondParticleField_y = 0;
+const secondParticleWidth = 50;
+const secondParticleHeight = HEIGHT;
+const secondParticleColour = r.BLUE;
 
 function running() {
     return !r.WindowShouldClose();
@@ -36,15 +42,21 @@ function setup() {
 
 // Detect particle field
 function detectParticle() {
-    if (
-        scanner_x + scannerWidth >= particleField_x &&
-        scanner_x <= particleField_x + particleWidth
-    ) {
+    const touchesFirst =
+        scanner_x + scannerWidth >= firstParticleField_x &&
+        scanner_x <= firstParticleField_x + firstParticleWidth;
+
+    const touchesSecond =
+        scanner_x + scannerWidth >= secondParticleField_x &&
+        scanner_x <= secondParticleField_x + secondParticleWidth;
+
+    if (touchesFirst || touchesSecond) {
         scannerColour = r.RED;
     } else {
         scannerColour = r.WHITE;
     }
 }
+
 
 
 // Update scanner position
@@ -70,11 +82,18 @@ function draw() {
 
     // Draw particle field
     r.DrawRectangle(
-        particleField_x,
-        particleField_y,
-        particleWidth,
-        particleHeight,
-        particleColour
+        firstParticleField_x,
+        firstParticleField_y,
+        firstParticleWidth,
+        firstParticleHeight,
+        firstParticleColour
+    );
+    r.DrawRectangle(
+        secondParticleField_x,
+        secondParticleField_y,
+        secondParticleWidth,
+        secondParticleHeight,
+        secondParticleColour
     );
 
     // Draw scanner
