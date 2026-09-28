@@ -6,7 +6,7 @@ function velocityPosition(x, width, start, end, velocity) {
 
 }
 
-function movingDetector(x, velocity) {
+function move(x, velocity) {
     return x + velocity;
 }
 function isOverLapping(x, width, particle_x, particleWidth, particle2_x, particle2Width) {
@@ -17,6 +17,6 @@ function isOverLapping(x, width, particle_x, particleWidth, particle2_x, particl
 module.exports = {
     isdetectorOutOfBound,
     velocityPosition,
-    movingDetector,
+    move,
     isOverLapping,
 };
