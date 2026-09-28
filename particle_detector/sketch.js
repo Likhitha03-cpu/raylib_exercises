@@ -1,7 +1,7 @@
 const r = require("raylib");
 const d1 = require("./d1");
 const detector = require("./detector");
-const { height } = require("./d1");
+
 const WIDTH = 700;
 const HEIGHT = 500;
 
@@ -19,7 +19,6 @@ function setup() {
 function drawRange(x, y, width, height, colour) {
     r.DrawRectangle(x, y, width, height, colour);
 }
-
 
 function changeColour(x, width, particle_x, particleWidth, particle2_x, particle2Width) {
     d1.colour = detector.isOverLapping(x, width, particle_x, particleWidth, particle2_x, particle2Width) ? r.RED : r.WHITE;
@@ -48,7 +47,6 @@ function draw() {
 function teardown() {
     r.CloseWindow();
 }
-
 module.exports = {
     running,
     setup,
