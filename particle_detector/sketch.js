@@ -23,6 +23,7 @@ let secondScanner_direction = 3;
 const secondScannerWidth = 40;
 const secondScannerHeight = HEIGHT;
 let secondScannerColour = r.WHITE;
+
 //third Scanner
 let thirdScanner_x = 0;
 let thirdScanner_y = 0;
