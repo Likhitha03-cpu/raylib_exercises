@@ -1,6 +1,6 @@
 const r = require("raylib");
 const d1 = require("./d1");
-const calc = require("./calculation")
+const detector = require("./detector")
 const WIDTH = 700;
 const HEIGHT = 500;
 
@@ -19,15 +19,15 @@ function drawRange(x, y, width, height, colour) {
     r.DrawRectangle(x, y, width, height, colour);
 }
 
-isOverLapping = "true"
-function changeColour() {
-    d1.colour = isOverLapping ? r.RED : r.WHITE;
+
+function changeColour(x, width, particle_x, particleWidth) {
+    d1.colour = detector.isOverLapping(x, width, particle_x, particleWidth) ? r.RED : r.WHITE;
 }
 
 function update() {
-    d1.velocity = calc.detectorVelocityPosition(d1.x, d1.width, WIDTH, d1.velocity);
-    d1.x = calc.movingDetector(d1.x, d1.velocity);
-    changeColour();
+    d1.velocity = detector.detectorVelocityPosition(d1.x, d1.width, WIDTH, d1.velocity);
+    d1.x = detector.movingDetector(d1.x, d1.velocity);
+    changeColour(d1.x, d1.width, particle_x, particleWidth);
 
 }
 const particle_x = 200;

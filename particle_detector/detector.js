@@ -8,8 +8,12 @@ function detectorVelocityPosition(x, width, WIDTH, velocity) {
 function movingDetector(x, velocity) {
     return x + velocity;
 }
+function isOverLapping(x, width, particle_x, particleWidth) {
+    return x + width >= particle_x && x <= particle_x + particleWidth
+}
 module.exports = {
     isdetectorOutOfBound,
     detectorVelocityPosition,
     movingDetector,
+    isOverLapping,
 };
