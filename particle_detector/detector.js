@@ -1,8 +1,8 @@
-function isdetectorOutOfBound(x, width, WIDTH) {
-    return x + width > WIDTH || x < 0;
+function isdetectorOutOfBound(x, width, start, end) {
+    return x + width >= end || x < start;
 }
-function velocityPosition(x, width, WIDTH, velocity) {
-    return isdetectorOutOfBound(x, width, WIDTH) ? - velocity : velocity
+function velocityPosition(x, width, start, end, velocity) {
+    return isdetectorOutOfBound(x, width, start, end) ? - velocity : velocity
 
 }
 
