@@ -1,9 +1,5 @@
 
 
-
-
-
-
 const r = require("raylib");
 
 // Window Dimensions
