@@ -1,22 +1,36 @@
-function isdetectorOutOfBound(x, width, start, end) {
+function isDetectorOutOfBound(x, width, start, end) {
     return x + width >= end || x < start;
 }
-function velocityPosition(x, width, start, end, velocity) {
-    return isdetectorOutOfBound(x, width, start, end) ? - velocity : velocity
 
+function updateVelocity(x, width, start, end, velocity) {
+    return isDetectorOutOfBound(x, width, start, end) ? -velocity : velocity;
 }
 
 function move(x, velocity) {
     return x + velocity;
 }
-function isOverLapping(x, width, particle_x, particleWidth, particle2_x, particle2Width) {
-    const isFirstParticleOverlap = x + width >= particle_x && x <= particle_x + particleWidth;
-    const isSecondParticleOverlap = x + width >= particle2_x && x <= particle2_x + particle2Width;
+
+function isOverLapping(
+    start,
+    width,
+    firstParticleField_x,
+    firstParticleWidth,
+    secondParticleField_x,
+    secondParticleWidth,
+) {
+    const isFirstParticleOverlap =
+        start + width >= firstParticleField_x &&
+        start <= firstParticleField_x + firstParticleWidth;
+    const isSecondParticleOverlap =
+        start + width >= secondParticleField_x &&
+        start <= secondParticleField_x + secondParticleWidth;
+
     return isFirstParticleOverlap || isSecondParticleOverlap;
 }
+
 module.exports = {
-    isdetectorOutOfBound,
-    velocityPosition,
+    isDetectorOutOfBound,
+    updateVelocity,
     move,
     isOverLapping,
 };
